@@ -19,8 +19,6 @@
     "webpack": "^1.14.0"
   },
   "dependencies": {
-    "axios": "^0.15.3",
-    "cloudinary-react": "^1.0.1",
     "glamor": "^2.20.40",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",

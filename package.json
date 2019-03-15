@@ -23,6 +23,7 @@
     "cloudinary-react": "^1.0.1",
     "glamor": "^2.20.40",
     "react": "^15.4.1",
-    "react-dom": "^15.4.1"
+    "react-dom": "^15.4.1",
+    "react-inlinesvg": "^0.8.4"
   }
 }

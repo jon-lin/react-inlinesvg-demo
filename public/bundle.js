@@ -57,11 +57,9 @@
 	
 	var _reactDom = __webpack_require__(/*! react-dom */ 40);
 	
-	var _glamor = __webpack_require__(/*! glamor */ 375);
+	var _Icon = __webpack_require__(/*! ./Icon */ 231);
 	
-	var _reactInlinesvg = __webpack_require__(/*! react-inlinesvg */ 401);
-	
-	var _reactInlinesvg2 = _interopRequireDefault(_reactInlinesvg);
+	var _Icon2 = _interopRequireDefault(_Icon);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -71,31 +69,34 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var starStyle = (0, _glamor.css)({
-	  '& .color1': { fill: 'pink' }
-	});
-	
 	var Main = function (_Component) {
 	  _inherits(Main, _Component);
 	
-	  function Main(props) {
+	  function Main() {
 	    _classCallCheck(this, Main);
 	
-	    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
-	
-	    _this.state = {
-	      gallery: []
-	    };
-	    return _this;
+	    return _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).apply(this, arguments));
 	  }
 	
 	  _createClass(Main, [{
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(_reactInlinesvg2.default, {
-	        className: starStyle,
-	        src: 'https://res.cloudinary.com/jonlin/image/upload/v1552571174/starIcon.svg'
-	      });
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_Icon2.default, {
+	          iconId: 'starIcon',
+	          color1: 'orange'
+	        }),
+	        _react2.default.createElement(_Icon2.default, {
+	          iconId: 'checklist1',
+	          color1: 'red',
+	          color2: 'pink',
+	          color3: 'blue',
+	          width: '200',
+	          height: '200'
+	        })
+	      );
 	    }
 	  }]);
 	
@@ -22891,295 +22892,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../process/browser.js */ 3)))
 
 /***/ }),
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */
-/*!*******************************!*\
-  !*** ./~/prop-types/index.js ***!
-  \*******************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 *
-	 * This source code is licensed under the MIT license found in the
-	 * LICENSE file in the root directory of this source tree.
-	 */
-	
-	if (process.env.NODE_ENV !== 'production') {
-	  var ReactIs = __webpack_require__(/*! react-is */ 31);
-	
-	  // By explicitly using `prop-types` you are opting into new development behavior.
-	  // http://fb.me/prop-types-in-prod
-	  var throwOnDirectAccess = true;
-	  module.exports = __webpack_require__(/*! ./factoryWithTypeCheckers */ 30)(ReactIs.isElement, throwOnDirectAccess);
-	} else {
-	  // By explicitly using `prop-types` you are opting into new production behavior.
-	  // http://fb.me/prop-types-in-prod
-	  module.exports = __webpack_require__(/*! ./factoryWithThrowingShims */ 191)();
-	}
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../process/browser.js */ 3)))
-
-/***/ }),
-/* 191 */
-/*!**************************************************!*\
-  !*** ./~/prop-types/factoryWithThrowingShims.js ***!
-  \**************************************************/
-/***/ (function(module, exports, __webpack_require__) {
-
-	/**
-	 * Copyright (c) 2013-present, Facebook, Inc.
-	 *
-	 * This source code is licensed under the MIT license found in the
-	 * LICENSE file in the root directory of this source tree.
-	 */
-	
-	'use strict';
-	
-	var ReactPropTypesSecret = __webpack_require__(/*! ./lib/ReactPropTypesSecret */ 34);
-	
-	function emptyFunction() {}
-	function emptyFunctionWithReset() {}
-	emptyFunctionWithReset.resetWarningCache = emptyFunction;
-	
-	module.exports = function() {
-	  function shim(props, propName, componentName, location, propFullName, secret) {
-	    if (secret === ReactPropTypesSecret) {
-	      // It is still safe when called from React.
-	      return;
-	    }
-	    var err = new Error(
-	      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
-	      'Use PropTypes.checkPropTypes() to call them. ' +
-	      'Read more at http://fb.me/use-check-prop-types'
-	    );
-	    err.name = 'Invariant Violation';
-	    throw err;
-	  };
-	  shim.isRequired = shim;
-	  function getShim() {
-	    return shim;
-	  };
-	  // Important!
-	  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
-	  var ReactPropTypes = {
-	    array: shim,
-	    bool: shim,
-	    func: shim,
-	    number: shim,
-	    object: shim,
-	    string: shim,
-	    symbol: shim,
-	
-	    any: shim,
-	    arrayOf: getShim,
-	    element: shim,
-	    elementType: shim,
-	    instanceOf: getShim,
-	    node: shim,
-	    objectOf: getShim,
-	    oneOf: getShim,
-	    oneOfType: getShim,
-	    shape: getShim,
-	    exact: getShim,
-	
-	    checkPropTypes: emptyFunctionWithReset,
-	    resetWarningCache: emptyFunction
-	  };
-	
-	  ReactPropTypes.PropTypes = ReactPropTypes;
-	
-	  return ReactPropTypes;
-	};
-
-
-/***/ }),
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */,
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */,
-/* 256 */,
-/* 257 */,
-/* 258 */,
-/* 259 */,
-/* 260 */,
-/* 261 */,
-/* 262 */,
-/* 263 */,
-/* 264 */,
-/* 265 */,
-/* 266 */,
-/* 267 */,
-/* 268 */,
-/* 269 */,
-/* 270 */,
-/* 271 */,
-/* 272 */,
-/* 273 */,
-/* 274 */,
-/* 275 */,
-/* 276 */,
-/* 277 */,
-/* 278 */,
-/* 279 */,
-/* 280 */,
-/* 281 */,
-/* 282 */,
-/* 283 */,
-/* 284 */,
-/* 285 */,
-/* 286 */,
-/* 287 */,
-/* 288 */,
-/* 289 */,
-/* 290 */,
-/* 291 */,
-/* 292 */,
-/* 293 */,
-/* 294 */,
-/* 295 */,
-/* 296 */,
-/* 297 */,
-/* 298 */,
-/* 299 */,
-/* 300 */,
-/* 301 */,
-/* 302 */,
-/* 303 */,
-/* 304 */,
-/* 305 */,
-/* 306 */,
-/* 307 */,
-/* 308 */,
-/* 309 */,
-/* 310 */,
-/* 311 */,
-/* 312 */,
-/* 313 */,
-/* 314 */,
-/* 315 */,
-/* 316 */,
-/* 317 */,
-/* 318 */,
-/* 319 */,
-/* 320 */,
-/* 321 */,
-/* 322 */,
-/* 323 */,
-/* 324 */,
-/* 325 */,
-/* 326 */,
-/* 327 */,
-/* 328 */,
-/* 329 */,
-/* 330 */,
-/* 331 */,
-/* 332 */,
-/* 333 */,
-/* 334 */,
-/* 335 */,
-/* 336 */,
-/* 337 */,
-/* 338 */,
-/* 339 */,
-/* 340 */,
-/* 341 */,
-/* 342 */,
-/* 343 */,
-/* 344 */,
-/* 345 */,
-/* 346 */,
-/* 347 */,
-/* 348 */,
-/* 349 */,
-/* 350 */,
-/* 351 */,
-/* 352 */,
-/* 353 */,
-/* 354 */,
-/* 355 */,
-/* 356 */,
-/* 357 */,
-/* 358 */,
-/* 359 */,
-/* 360 */,
-/* 361 */,
-/* 362 */,
-/* 363 */,
-/* 364 */,
-/* 365 */,
-/* 366 */,
-/* 367 */,
-/* 368 */,
-/* 369 */,
-/* 370 */,
-/* 371 */,
-/* 372 */,
-/* 373 */,
-/* 374 */,
-/* 375 */
+/* 187 */
 /*!*******************************!*\
   !*** ./~/glamor/lib/index.js ***!
   \*******************************/
@@ -23258,17 +22971,17 @@
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _sheet = __webpack_require__(/*! ./sheet.js */ 376);
+	var _sheet = __webpack_require__(/*! ./sheet.js */ 188);
 	
-	var _CSSPropertyOperations = __webpack_require__(/*! ./CSSPropertyOperations */ 377);
+	var _CSSPropertyOperations = __webpack_require__(/*! ./CSSPropertyOperations */ 189);
 	
-	var _clean = __webpack_require__(/*! ./clean.js */ 380);
+	var _clean = __webpack_require__(/*! ./clean.js */ 192);
 	
 	var _clean2 = _interopRequireDefault(_clean);
 	
-	var _plugins = __webpack_require__(/*! ./plugins */ 381);
+	var _plugins = __webpack_require__(/*! ./plugins */ 193);
 	
-	var _hash = __webpack_require__(/*! ./hash */ 400);
+	var _hash = __webpack_require__(/*! ./hash */ 212);
 	
 	var _hash2 = _interopRequireDefault(_hash);
 	
@@ -24200,7 +23913,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../process/browser.js */ 3)))
 
 /***/ }),
-/* 376 */
+/* 188 */
 /*!*******************************!*\
   !*** ./~/glamor/lib/sheet.js ***!
   \*******************************/
@@ -24441,7 +24154,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../process/browser.js */ 3)))
 
 /***/ }),
-/* 377 */
+/* 189 */
 /*!*****************************************************!*\
   !*** ./~/glamor/lib/CSSPropertyOperations/index.js ***!
   \*****************************************************/
@@ -24459,7 +24172,7 @@
 	
 	var _camelizeStyleName2 = _interopRequireDefault(_camelizeStyleName);
 	
-	var _dangerousStyleValue = __webpack_require__(/*! ./dangerousStyleValue */ 378);
+	var _dangerousStyleValue = __webpack_require__(/*! ./dangerousStyleValue */ 190);
 	
 	var _dangerousStyleValue2 = _interopRequireDefault(_dangerousStyleValue);
 	
@@ -24612,7 +24325,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../process/browser.js */ 3)))
 
 /***/ }),
-/* 378 */
+/* 190 */
 /*!*******************************************************************!*\
   !*** ./~/glamor/lib/CSSPropertyOperations/dangerousStyleValue.js ***!
   \*******************************************************************/
@@ -24624,7 +24337,7 @@
 	  value: true
 	});
 	
-	var _CSSProperty = __webpack_require__(/*! ./CSSProperty */ 379);
+	var _CSSProperty = __webpack_require__(/*! ./CSSProperty */ 191);
 	
 	var _CSSProperty2 = _interopRequireDefault(_CSSProperty);
 	
@@ -24711,7 +24424,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../../process/browser.js */ 3)))
 
 /***/ }),
-/* 379 */
+/* 191 */
 /*!***********************************************************!*\
   !*** ./~/glamor/lib/CSSPropertyOperations/CSSProperty.js ***!
   \***********************************************************/
@@ -24873,7 +24586,7 @@
 	exports.default = CSSProperty;
 
 /***/ }),
-/* 380 */
+/* 192 */
 /*!*******************************!*\
   !*** ./~/glamor/lib/clean.js ***!
   \*******************************/
@@ -24935,7 +24648,7 @@
 	}
 
 /***/ }),
-/* 381 */
+/* 193 */
 /*!*********************************!*\
   !*** ./~/glamor/lib/plugins.js ***!
   \*********************************/
@@ -24958,9 +24671,9 @@
 	
 	var _objectAssign2 = _interopRequireDefault(_objectAssign);
 	
-	var _CSSPropertyOperations = __webpack_require__(/*! ./CSSPropertyOperations */ 377);
+	var _CSSPropertyOperations = __webpack_require__(/*! ./CSSPropertyOperations */ 189);
 	
-	var _prefixer = __webpack_require__(/*! ./prefixer */ 382);
+	var _prefixer = __webpack_require__(/*! ./prefixer */ 194);
 	
 	var _prefixer2 = _interopRequireDefault(_prefixer);
 	
@@ -25050,7 +24763,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../../process/browser.js */ 3)))
 
 /***/ }),
-/* 382 */
+/* 194 */
 /*!**********************************!*\
   !*** ./~/glamor/lib/prefixer.js ***!
   \**********************************/
@@ -25063,55 +24776,55 @@
 	});
 	exports.default = prefixer;
 	
-	var _staticData = __webpack_require__(/*! inline-style-prefixer/static/staticData */ 383);
+	var _staticData = __webpack_require__(/*! inline-style-prefixer/static/staticData */ 195);
 	
 	var _staticData2 = _interopRequireDefault(_staticData);
 	
-	var _prefixProperty = __webpack_require__(/*! inline-style-prefixer/utils/prefixProperty */ 384);
+	var _prefixProperty = __webpack_require__(/*! inline-style-prefixer/utils/prefixProperty */ 196);
 	
 	var _prefixProperty2 = _interopRequireDefault(_prefixProperty);
 	
-	var _prefixValue = __webpack_require__(/*! inline-style-prefixer/utils/prefixValue */ 386);
+	var _prefixValue = __webpack_require__(/*! inline-style-prefixer/utils/prefixValue */ 198);
 	
 	var _prefixValue2 = _interopRequireDefault(_prefixValue);
 	
-	var _cursor = __webpack_require__(/*! inline-style-prefixer/static/plugins/cursor */ 387);
+	var _cursor = __webpack_require__(/*! inline-style-prefixer/static/plugins/cursor */ 199);
 	
 	var _cursor2 = _interopRequireDefault(_cursor);
 	
-	var _crossFade = __webpack_require__(/*! inline-style-prefixer/static/plugins/crossFade */ 388);
+	var _crossFade = __webpack_require__(/*! inline-style-prefixer/static/plugins/crossFade */ 200);
 	
 	var _crossFade2 = _interopRequireDefault(_crossFade);
 	
-	var _filter = __webpack_require__(/*! inline-style-prefixer/static/plugins/filter */ 390);
+	var _filter = __webpack_require__(/*! inline-style-prefixer/static/plugins/filter */ 202);
 	
 	var _filter2 = _interopRequireDefault(_filter);
 	
-	var _flex = __webpack_require__(/*! inline-style-prefixer/static/plugins/flex */ 391);
+	var _flex = __webpack_require__(/*! inline-style-prefixer/static/plugins/flex */ 203);
 	
 	var _flex2 = _interopRequireDefault(_flex);
 	
-	var _flexboxOld = __webpack_require__(/*! inline-style-prefixer/static/plugins/flexboxOld */ 392);
+	var _flexboxOld = __webpack_require__(/*! inline-style-prefixer/static/plugins/flexboxOld */ 204);
 	
 	var _flexboxOld2 = _interopRequireDefault(_flexboxOld);
 	
-	var _gradient = __webpack_require__(/*! inline-style-prefixer/static/plugins/gradient */ 393);
+	var _gradient = __webpack_require__(/*! inline-style-prefixer/static/plugins/gradient */ 205);
 	
 	var _gradient2 = _interopRequireDefault(_gradient);
 	
-	var _imageSet = __webpack_require__(/*! inline-style-prefixer/static/plugins/imageSet */ 394);
+	var _imageSet = __webpack_require__(/*! inline-style-prefixer/static/plugins/imageSet */ 206);
 	
 	var _imageSet2 = _interopRequireDefault(_imageSet);
 	
-	var _position = __webpack_require__(/*! inline-style-prefixer/static/plugins/position */ 395);
+	var _position = __webpack_require__(/*! inline-style-prefixer/static/plugins/position */ 207);
 	
 	var _position2 = _interopRequireDefault(_position);
 	
-	var _sizing = __webpack_require__(/*! inline-style-prefixer/static/plugins/sizing */ 396);
+	var _sizing = __webpack_require__(/*! inline-style-prefixer/static/plugins/sizing */ 208);
 	
 	var _sizing2 = _interopRequireDefault(_sizing);
 	
-	var _transition = __webpack_require__(/*! inline-style-prefixer/static/plugins/transition */ 397);
+	var _transition = __webpack_require__(/*! inline-style-prefixer/static/plugins/transition */ 209);
 	
 	var _transition2 = _interopRequireDefault(_transition);
 	
@@ -25139,7 +24852,7 @@
 	}
 
 /***/ }),
-/* 383 */
+/* 195 */
 /*!******************************************************!*\
   !*** ./~/inline-style-prefixer/static/staticData.js ***!
   \******************************************************/
@@ -25165,7 +24878,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 384 */
+/* 196 */
 /*!*********************************************************!*\
   !*** ./~/inline-style-prefixer/utils/prefixProperty.js ***!
   \*********************************************************/
@@ -25178,7 +24891,7 @@
 	});
 	exports.default = prefixProperty;
 	
-	var _capitalizeString = __webpack_require__(/*! ./capitalizeString */ 385);
+	var _capitalizeString = __webpack_require__(/*! ./capitalizeString */ 197);
 	
 	var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
 	
@@ -25195,7 +24908,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 385 */
+/* 197 */
 /*!***********************************************************!*\
   !*** ./~/inline-style-prefixer/utils/capitalizeString.js ***!
   \***********************************************************/
@@ -25213,7 +24926,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 386 */
+/* 198 */
 /*!******************************************************!*\
   !*** ./~/inline-style-prefixer/utils/prefixValue.js ***!
   \******************************************************/
@@ -25239,7 +24952,7 @@
 	module.exports = exports["default"];
 
 /***/ }),
-/* 387 */
+/* 199 */
 /*!**********************************************************!*\
   !*** ./~/inline-style-prefixer/static/plugins/cursor.js ***!
   \**********************************************************/
@@ -25270,7 +24983,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 388 */
+/* 200 */
 /*!*************************************************************!*\
   !*** ./~/inline-style-prefixer/static/plugins/crossFade.js ***!
   \*************************************************************/
@@ -25283,7 +24996,7 @@
 	});
 	exports.default = crossFade;
 	
-	var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ 389);
+	var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ 201);
 	
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 	
@@ -25301,7 +25014,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 389 */
+/* 201 */
 /*!**************************************************!*\
   !*** ./~/css-in-js-utils/lib/isPrefixedValue.js ***!
   \**************************************************/
@@ -25321,7 +25034,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 390 */
+/* 202 */
 /*!**********************************************************!*\
   !*** ./~/inline-style-prefixer/static/plugins/filter.js ***!
   \**********************************************************/
@@ -25334,7 +25047,7 @@
 	});
 	exports.default = filter;
 	
-	var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ 389);
+	var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ 201);
 	
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 	
@@ -25352,7 +25065,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 391 */
+/* 203 */
 /*!********************************************************!*\
   !*** ./~/inline-style-prefixer/static/plugins/flex.js ***!
   \********************************************************/
@@ -25377,7 +25090,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 392 */
+/* 204 */
 /*!**************************************************************!*\
   !*** ./~/inline-style-prefixer/static/plugins/flexboxOld.js ***!
   \**************************************************************/
@@ -25424,7 +25137,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 393 */
+/* 205 */
 /*!************************************************************!*\
   !*** ./~/inline-style-prefixer/static/plugins/gradient.js ***!
   \************************************************************/
@@ -25437,7 +25150,7 @@
 	});
 	exports.default = gradient;
 	
-	var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ 389);
+	var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ 201);
 	
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 	
@@ -25457,7 +25170,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 394 */
+/* 206 */
 /*!************************************************************!*\
   !*** ./~/inline-style-prefixer/static/plugins/imageSet.js ***!
   \************************************************************/
@@ -25470,7 +25183,7 @@
 	});
 	exports.default = imageSet;
 	
-	var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ 389);
+	var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ 201);
 	
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 	
@@ -25488,7 +25201,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 395 */
+/* 207 */
 /*!************************************************************!*\
   !*** ./~/inline-style-prefixer/static/plugins/position.js ***!
   \************************************************************/
@@ -25508,7 +25221,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 396 */
+/* 208 */
 /*!**********************************************************!*\
   !*** ./~/inline-style-prefixer/static/plugins/sizing.js ***!
   \**********************************************************/
@@ -25549,7 +25262,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 397 */
+/* 209 */
 /*!**************************************************************!*\
   !*** ./~/inline-style-prefixer/static/plugins/transition.js ***!
   \**************************************************************/
@@ -25562,15 +25275,15 @@
 	});
 	exports.default = transition;
 	
-	var _hyphenateProperty = __webpack_require__(/*! css-in-js-utils/lib/hyphenateProperty */ 398);
+	var _hyphenateProperty = __webpack_require__(/*! css-in-js-utils/lib/hyphenateProperty */ 210);
 	
 	var _hyphenateProperty2 = _interopRequireDefault(_hyphenateProperty);
 	
-	var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ 389);
+	var _isPrefixedValue = __webpack_require__(/*! css-in-js-utils/lib/isPrefixedValue */ 201);
 	
 	var _isPrefixedValue2 = _interopRequireDefault(_isPrefixedValue);
 	
-	var _capitalizeString = __webpack_require__(/*! ../../utils/capitalizeString */ 385);
+	var _capitalizeString = __webpack_require__(/*! ../../utils/capitalizeString */ 197);
 	
 	var _capitalizeString2 = _interopRequireDefault(_capitalizeString);
 	
@@ -25650,7 +25363,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 398 */
+/* 210 */
 /*!****************************************************!*\
   !*** ./~/css-in-js-utils/lib/hyphenateProperty.js ***!
   \****************************************************/
@@ -25663,7 +25376,7 @@
 	});
 	exports.default = hyphenateProperty;
 	
-	var _hyphenateStyleName = __webpack_require__(/*! hyphenate-style-name */ 399);
+	var _hyphenateStyleName = __webpack_require__(/*! hyphenate-style-name */ 211);
 	
 	var _hyphenateStyleName2 = _interopRequireDefault(_hyphenateStyleName);
 	
@@ -25675,7 +25388,7 @@
 	module.exports = exports['default'];
 
 /***/ }),
-/* 399 */
+/* 211 */
 /*!*********************************************!*\
   !*** ./~/hyphenate-style-name/index.cjs.js ***!
   \*********************************************/
@@ -25705,7 +25418,7 @@
 
 
 /***/ }),
-/* 400 */
+/* 212 */
 /*!******************************!*\
   !*** ./~/glamor/lib/hash.js ***!
   \******************************/
@@ -25783,7 +25496,7 @@
 	}
 
 /***/ }),
-/* 401 */
+/* 213 */
 /*!****************************************!*\
   !*** ./~/react-inlinesvg/lib/index.js ***!
   \****************************************/
@@ -25801,19 +25514,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _propTypes = __webpack_require__(/*! prop-types */ 190);
+	var _propTypes = __webpack_require__(/*! prop-types */ 214);
 	
 	var _propTypes2 = _interopRequireDefault(_propTypes);
 	
-	var _httpplease = __webpack_require__(/*! httpplease */ 402);
+	var _httpplease = __webpack_require__(/*! httpplease */ 216);
 	
 	var _httpplease2 = _interopRequireDefault(_httpplease);
 	
-	var _oldiexdomain = __webpack_require__(/*! httpplease/plugins/oldiexdomain */ 412);
+	var _oldiexdomain = __webpack_require__(/*! httpplease/plugins/oldiexdomain */ 226);
 	
 	var _oldiexdomain2 = _interopRequireDefault(_oldiexdomain);
 	
-	var _utils = __webpack_require__(/*! ./utils */ 414);
+	var _utils = __webpack_require__(/*! ./utils */ 228);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -26119,7 +25832,109 @@
 	exports.default = InlineSVG;
 
 /***/ }),
-/* 402 */
+/* 214 */
+/*!*******************************!*\
+  !*** ./~/prop-types/index.js ***!
+  \*******************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+	
+	if (process.env.NODE_ENV !== 'production') {
+	  var ReactIs = __webpack_require__(/*! react-is */ 31);
+	
+	  // By explicitly using `prop-types` you are opting into new development behavior.
+	  // http://fb.me/prop-types-in-prod
+	  var throwOnDirectAccess = true;
+	  module.exports = __webpack_require__(/*! ./factoryWithTypeCheckers */ 30)(ReactIs.isElement, throwOnDirectAccess);
+	} else {
+	  // By explicitly using `prop-types` you are opting into new production behavior.
+	  // http://fb.me/prop-types-in-prod
+	  module.exports = __webpack_require__(/*! ./factoryWithThrowingShims */ 215)();
+	}
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(/*! ./../process/browser.js */ 3)))
+
+/***/ }),
+/* 215 */
+/*!**************************************************!*\
+  !*** ./~/prop-types/factoryWithThrowingShims.js ***!
+  \**************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	/**
+	 * Copyright (c) 2013-present, Facebook, Inc.
+	 *
+	 * This source code is licensed under the MIT license found in the
+	 * LICENSE file in the root directory of this source tree.
+	 */
+	
+	'use strict';
+	
+	var ReactPropTypesSecret = __webpack_require__(/*! ./lib/ReactPropTypesSecret */ 34);
+	
+	function emptyFunction() {}
+	function emptyFunctionWithReset() {}
+	emptyFunctionWithReset.resetWarningCache = emptyFunction;
+	
+	module.exports = function() {
+	  function shim(props, propName, componentName, location, propFullName, secret) {
+	    if (secret === ReactPropTypesSecret) {
+	      // It is still safe when called from React.
+	      return;
+	    }
+	    var err = new Error(
+	      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+	      'Use PropTypes.checkPropTypes() to call them. ' +
+	      'Read more at http://fb.me/use-check-prop-types'
+	    );
+	    err.name = 'Invariant Violation';
+	    throw err;
+	  };
+	  shim.isRequired = shim;
+	  function getShim() {
+	    return shim;
+	  };
+	  // Important!
+	  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+	  var ReactPropTypes = {
+	    array: shim,
+	    bool: shim,
+	    func: shim,
+	    number: shim,
+	    object: shim,
+	    string: shim,
+	    symbol: shim,
+	
+	    any: shim,
+	    arrayOf: getShim,
+	    element: shim,
+	    elementType: shim,
+	    instanceOf: getShim,
+	    node: shim,
+	    objectOf: getShim,
+	    oneOf: getShim,
+	    oneOfType: getShim,
+	    shape: getShim,
+	    exact: getShim,
+	
+	    checkPropTypes: emptyFunctionWithReset,
+	    resetWarningCache: emptyFunction
+	  };
+	
+	  ReactPropTypes.PropTypes = ReactPropTypes;
+	
+	  return ReactPropTypes;
+	};
+
+
+/***/ }),
+/* 216 */
 /*!***********************************!*\
   !*** ./~/httpplease/lib/index.js ***!
   \***********************************/
@@ -26128,14 +25943,14 @@
 	'use strict';
 	
 	var
-	  cleanURL = __webpack_require__(/*! ../plugins/cleanurl */ 403),
-	  XHR = __webpack_require__(/*! ./xhr */ 404),
-	  delay = __webpack_require__(/*! ./utils/delay */ 405),
-	  RequestError = __webpack_require__(/*! ./error */ 406),
-	  Response = __webpack_require__(/*! ./response */ 407),
-	  Request = __webpack_require__(/*! ./request */ 408),
-	  extend = __webpack_require__(/*! xtend */ 410),
-	  once = __webpack_require__(/*! ./utils/once */ 411);
+	  cleanURL = __webpack_require__(/*! ../plugins/cleanurl */ 217),
+	  XHR = __webpack_require__(/*! ./xhr */ 218),
+	  delay = __webpack_require__(/*! ./utils/delay */ 219),
+	  RequestError = __webpack_require__(/*! ./error */ 220),
+	  Response = __webpack_require__(/*! ./response */ 221),
+	  Request = __webpack_require__(/*! ./request */ 222),
+	  extend = __webpack_require__(/*! xtend */ 224),
+	  once = __webpack_require__(/*! ./utils/once */ 225);
 	
 	var i,
 	    createError = RequestError.create;
@@ -26340,7 +26155,7 @@
 
 
 /***/ }),
-/* 403 */
+/* 217 */
 /*!******************************************!*\
   !*** ./~/httpplease/plugins/cleanurl.js ***!
   \******************************************/
@@ -26358,7 +26173,7 @@
 
 
 /***/ }),
-/* 404 */
+/* 218 */
 /*!*****************************************!*\
   !*** ./~/httpplease/lib/xhr-browser.js ***!
   \*****************************************/
@@ -26368,7 +26183,7 @@
 
 
 /***/ }),
-/* 405 */
+/* 219 */
 /*!*****************************************!*\
   !*** ./~/httpplease/lib/utils/delay.js ***!
   \*****************************************/
@@ -26392,7 +26207,7 @@
 
 
 /***/ }),
-/* 406 */
+/* 220 */
 /*!***********************************!*\
   !*** ./~/httpplease/lib/error.js ***!
   \***********************************/
@@ -26400,9 +26215,9 @@
 
 	'use strict';
 	
-	var Response = __webpack_require__(/*! ./response */ 407);
-	var extractResponseProps = __webpack_require__(/*! ./utils/extractResponseProps */ 409);
-	var extend = __webpack_require__(/*! xtend */ 410);
+	var Response = __webpack_require__(/*! ./response */ 221);
+	var extractResponseProps = __webpack_require__(/*! ./utils/extractResponseProps */ 223);
+	var extend = __webpack_require__(/*! xtend */ 224);
 	
 	function RequestError(message, props) {
 	  var err = new Error(message);
@@ -26437,7 +26252,7 @@
 
 
 /***/ }),
-/* 407 */
+/* 221 */
 /*!**************************************!*\
   !*** ./~/httpplease/lib/response.js ***!
   \**************************************/
@@ -26445,8 +26260,8 @@
 
 	'use strict';
 	
-	var Request = __webpack_require__(/*! ./request */ 408);
-	var extractResponseProps = __webpack_require__(/*! ./utils/extractResponseProps */ 409);
+	var Request = __webpack_require__(/*! ./request */ 222);
+	var extractResponseProps = __webpack_require__(/*! ./utils/extractResponseProps */ 223);
 	
 	function Response(props) {
 	  this.request = props.request;
@@ -26470,7 +26285,7 @@
 
 
 /***/ }),
-/* 408 */
+/* 222 */
 /*!*************************************!*\
   !*** ./~/httpplease/lib/request.js ***!
   \*************************************/
@@ -26522,7 +26337,7 @@
 
 
 /***/ }),
-/* 409 */
+/* 223 */
 /*!********************************************************!*\
   !*** ./~/httpplease/lib/utils/extractResponseProps.js ***!
   \********************************************************/
@@ -26530,7 +26345,7 @@
 
 	'use strict';
 	
-	var extend = __webpack_require__(/*! xtend */ 410);
+	var extend = __webpack_require__(/*! xtend */ 224);
 	
 	module.exports = function(req) {
 	  var xhr = req.xhr;
@@ -26564,7 +26379,7 @@
 
 
 /***/ }),
-/* 410 */
+/* 224 */
 /*!***************************************!*\
   !*** ./~/httpplease/~/xtend/index.js ***!
   \***************************************/
@@ -26590,7 +26405,7 @@
 
 
 /***/ }),
-/* 411 */
+/* 225 */
 /*!****************************************!*\
   !*** ./~/httpplease/lib/utils/once.js ***!
   \****************************************/
@@ -26612,7 +26427,7 @@
 
 
 /***/ }),
-/* 412 */
+/* 226 */
 /*!**********************************************!*\
   !*** ./~/httpplease/plugins/oldiexdomain.js ***!
   \**********************************************/
@@ -26621,8 +26436,8 @@
 	'use strict';
 	
 	var
-	  urllite = __webpack_require__(/*! urllite/lib/core */ 413),
-	  once = __webpack_require__(/*! ../lib/utils/once */ 411);
+	  urllite = __webpack_require__(/*! urllite/lib/core */ 227),
+	  once = __webpack_require__(/*! ../lib/utils/once */ 225);
 	
 	var warningShown = false;
 	
@@ -26689,7 +26504,7 @@
 
 
 /***/ }),
-/* 413 */
+/* 227 */
 /*!*******************************!*\
   !*** ./~/urllite/lib/core.js ***!
   \*******************************/
@@ -26763,7 +26578,7 @@
 
 
 /***/ }),
-/* 414 */
+/* 228 */
 /*!****************************************!*\
   !*** ./~/react-inlinesvg/lib/utils.js ***!
   \****************************************/
@@ -26776,7 +26591,7 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _once = __webpack_require__(/*! once */ 415);
+	var _once = __webpack_require__(/*! once */ 229);
 	
 	var _once2 = _interopRequireDefault(_once);
 	
@@ -26904,13 +26719,13 @@
 	};
 
 /***/ }),
-/* 415 */
+/* 229 */
 /*!************************!*\
   !*** ./~/once/once.js ***!
   \************************/
 /***/ (function(module, exports, __webpack_require__) {
 
-	var wrappy = __webpack_require__(/*! wrappy */ 416)
+	var wrappy = __webpack_require__(/*! wrappy */ 230)
 	module.exports = wrappy(once)
 	module.exports.strict = wrappy(onceStrict)
 	
@@ -26955,7 +26770,7 @@
 
 
 /***/ }),
-/* 416 */
+/* 230 */
 /*!****************************!*\
   !*** ./~/wrappy/wrappy.js ***!
   \****************************/
@@ -26995,6 +26810,60 @@
 	  }
 	}
 
+
+/***/ }),
+/* 231 */
+/*!*********************!*\
+  !*** ./src/Icon.js ***!
+  \*********************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _glamor = __webpack_require__(/*! glamor */ 187);
+	
+	var _reactInlinesvg = __webpack_require__(/*! react-inlinesvg */ 213);
+	
+	var _reactInlinesvg2 = _interopRequireDefault(_reactInlinesvg);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var Icon = function Icon(_ref) {
+	  var color1 = _ref.color1,
+	      color2 = _ref.color2,
+	      color3 = _ref.color3,
+	      width = _ref.width,
+	      height = _ref.height,
+	      iconId = _ref.iconId;
+	
+	  var svgStyle = (0, _glamor.css)({
+	    '& svg': {
+	      width: width,
+	      height: height,
+	      '& .color1': { fill: color1 },
+	      '& .color2': { fill: color2 },
+	      '& .color3': { fill: color3 }
+	    }
+	  });
+	
+	  return _react2.default.createElement(
+	    'span',
+	    svgStyle,
+	    _react2.default.createElement(_reactInlinesvg2.default, {
+	      src: 'https://res.cloudinary.com/jonlin/image/upload/v1552571174/' + iconId + '.svg'
+	    })
+	  );
+	};
+	
+	exports.default = Icon;
 
 /***/ })
 /******/ ]);

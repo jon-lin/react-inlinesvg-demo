@@ -10,4 +10,4 @@ in one window and in the other window run
 yarn run serve
 ```
 
-Go to http://localhost:3000 and refresh the browser to see any changes you've made to the code (there's no hot reloading).
+Go to http://localhost:5000 and refresh the browser to see any changes you've made to the code (there's no hot reloading).
